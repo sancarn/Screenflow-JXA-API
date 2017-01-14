@@ -1,3 +1,41 @@
+function canvasResize(w,h){
+	var system = Application('System Events')
+	var ScreenFlow = system.processes['ScreenFlow']
+	
+	//Open resize canvas menu
+	ScreenFlow.windows[0].buttons[6].click()
+	
+	//Due to the way ScreenFlow works, these elements have to be focused to be changed
+	ScreenFlow.windows[0].textFields[0].attributes['AXFocused'].value=true
+	ScreenFlow.windows[0].textFields[0].value = w.toString()
+
+	//Due to the way ScreenFlow works, these elements have to be focused to be changed	
+	ScreenFlow.windows[0].textFields[1].attributes['AXFocused'].value=true
+	ScreenFlow.windows[0].textFields[1].value = h.toString()
+	
+	//Confirm chages.
+	ScreenFlow.windows[0].buttons[0].click()
+}
+
+function start(){
+	var system = Application('System Events')
+	var ScreenFlow = system.processes['ScreenFlow']
+	
+	//Click rewind button
+	ScreenFlow.windows[0].buttons[5].click()
+}
+
+
+function end(){
+	var system = Application('System Events')
+	var ScreenFlow = system.processes['ScreenFlow']
+	
+	//Click forward-wind button
+	ScreenFlow.windows[0].buttons[3].click()
+}
+
+
+
 /*
  * Insert picture at video cursor
  *     videoName should be a string
@@ -44,7 +82,7 @@ function getVideoNames(){
 	var menuItems = ScreenFlow.windows[0].scrollAreas[0].popUpButtons[0].menus[0].menuItems()
 	
 	//Close "addVideoAtCursor" menu
-	ScreenFlow.windows[0].scrollAreas[0].popUpButtons[0].cancel() 
+	system.keycode(53) 
 	
 	//Get video names
 	videos=[]
@@ -71,7 +109,7 @@ function addVideoAtCursorI(index){
 	var menuItems = ScreenFlow.windows[0].scrollAreas[0].popUpButtons[0].menus[0].menuItems()
 	
 
-	menuItem[index].click()
+	menuItems[index].click()
 }
 
 /*
@@ -79,6 +117,7 @@ function addVideoAtCursorI(index){
  */
 
 function getVideoCount(){
+	
 	var system = Application('System Events')
 	var ScreenFlow = system.processes['ScreenFlow']
 	
@@ -89,7 +128,8 @@ function getVideoCount(){
 	var menuItems = ScreenFlow.windows[0].scrollAreas[0].popUpButtons[0].menus[0].menuItems()
 	
 	//Close "addVideoAtCursor" menu
-	ScreenFlow.windows[0].scrollAreas[0].popUpButtons[0].cancel() 
+	system.keyCode(53)
 	
 	return menuItems.length
+	
 }
