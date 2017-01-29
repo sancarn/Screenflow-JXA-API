@@ -1,0 +1,193 @@
+Screenflow = {
+    Projects: [],
+    Services: [],
+    Preferences: [],
+    newProject: function(filePath,screenDimensions,backgroundColor){
+        var Project = new Project()
+        Project.setDimensions(screenDimensions[0],screenDimensions[1])
+        Project.setPath(filePath)
+        Project.setBackgroundColor(backgroundColor)
+        Project.create()
+        Projects.push(Project)
+        return Project
+    },
+    openProject: function(filePath){
+        var Finder = Application('Finder')
+        Finder.open(Path(filePath))
+        var Project = Project.getCurrentProject()
+        Projects.push(Project)
+        return Project
+    },
+    activeProject: function(){
+        var Project = Project.getCurrentProject()
+        Projects.push(Project)
+        return Project
+    },
+    clearRecent: function(){
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menus...
+    },
+    getServices: function(){
+        //Might not actually work as expected... Not sure why not though...
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        var mServices = SF.menuBars[0].menus['ScreenFlow'].menuItems['Services'].menus['Services'].menuItems()
+        for(var i=1;i<mServices.length;i++){
+            {Name:mServices[i].name(),Button:mServices[i]}
+        }
+        return Services
+    },
+    hideScreenflow: function(){
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Hide ScreenFlow"].click()
+    },
+    hideOthers: function(){
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Hide Others"].click()
+
+    },
+    getPreferences: function(){
+        //get array of controls:
+        tabs = openPreferences().toolbars[0].entireContents()
+        var prefs = {};
+
+        getTab(i){
+            //Reset object specifier for tabs
+            var win = openPreferences()
+            var tabs = win.toolbars[0].entireContents()
+
+            //Switch to tab
+            tabs[i].click()
+
+            //Get new preferences window
+            var win = openPreferences()
+            return win
+        }
+
+        GetPreferenceContent: {
+            var win = getTab(0)
+            if(win.checkboxes.byName("Countdown for ").value()=='0'){
+                saveState_CountdownFor = true
+                //Enable to allow reading of countdown info
+                win.checkboxes.byName("Countdown for ").click()
+            }
+            prefs.general = {}
+        }
+
+
+
+
+        }
+    },
+    setPreferences: function(win,prefs){
+
+    },
+    openPreferences: function(){
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+
+        //Try to find preferences in screenflow:
+        For(var i = 0;i<SF.windows.length;i++){
+            if(SF.windows[i].attributes['accessibilityIdentifier'].value() == 'PreferencesWindowIdentifier'){
+                return SF.windows[i]
+            }
+        }
+
+        //Otherwise if preferences window cannot be found open the preferences window
+        SF.menuBars[0].menus['ScreenFlow'].menuItems['Preferences…'].click()
+        return SF.windows[0]
+    },
+    closePreferences: function(win){
+        win.buttons[2].click()
+    },
+    showAll: function(){
+        // Bring all screenflow windows to the front.
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Show All"].click()
+    },
+    checkForUpdates: function(){
+        //Check for screenflow updates
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Check for Updates..."].click()
+    },
+    quitAll: function(){
+        //Quit all windows then quit application - i.e. do not keep workspace!
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Quit ScreenFlow"].click()
+    },
+    quit: function(){
+        //Quit but keep the current workspace/windows
+        var system = Application('System Events')
+        var SF = system.processes['ScreenFlow']
+        SF.menuBars[0].menus['ScreenFlow'].menuItems["Quit and Keep Windows"].click()
+    }
+}
+Project = function(){
+    this.created = false
+    setPath = function(path){
+        if(this.created){
+            //.. do stuff
+        }
+
+        this.path = path
+    }
+    setScreenDimensions = function(w,h){
+        if(this.created){
+            //.. do stuff
+        }
+        this.screenDimensions = [w,h]
+    }
+    setBackgroundColor = function(color){
+        if(this.created){
+            //.. do stuff
+        }
+
+        this.backgroundColor = color
+    }
+    getPath = function(){
+
+    }
+    getScreenDimensions = function(){
+
+    }
+    getBackgroundColor = function(){
+
+    }
+    create = function(){
+        //creates a screenflow project from a project object
+    }
+    getCurrentProject = function(){
+        this.path = getPath()
+        this.screenDimensions = getScreenDimensions()
+        this.backgroundColor = getBackgroundColor()
+    }
+}
+
+Preference = function(){
+    this.key
+    this.value
+}
+
+
+var SF = new Screenflow
+NewPrefs = {...}
+var PrefsEnabled = SF.Preferences.checkPreferences(NewPrefs)
+if(!PrefsEnabled){
+    OldPrefs = SF.Preferences.getPreferences()
+    SF.Preferences.setPreferences(NewPrefs)
+}
+
+
+//do some stuff
+
+
+if(!PrefsEnabled){
+    SF.Preferences.setPreferences(OldPrefs)
+}
+ExitApp
