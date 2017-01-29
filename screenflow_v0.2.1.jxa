@@ -35,7 +35,7 @@ Screenflow = {
     clearRecent: function(){
         var system = Application('System Events')
         var SF = system.processes['ScreenFlow']
-        SF.menus...
+        SF.menuBars[0].menus['File'].menuItems['Open Recent'].menus['Open Recent'].menuItems['Clear Menu'].click()
     },
     getServices: function(){
         //Might not actually work as expected... Not sure why not though...
