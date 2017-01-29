@@ -1,3 +1,12 @@
+//Take screenshot and save to ~/test.png:
+//"screencapture -l" & windowid & " ~/test.png"
+
+//Find pixel color:
+//http://macscripter.net/viewtopic.php?id=26833
+//in obj-c: http://files.macscripter.net/joy/files/pixelcolor.m   --  executable: http://files.macscripter.net/joy/files/pixelcolor.zip
+//with executable: /pixelcolor imgpath pixelposx pixelposy
+
+
 Screenflow = {
     Projects: [],
     Services: [],
@@ -69,18 +78,44 @@ Screenflow = {
 
         GetPreferenceContent: {
             var win = getTab(0)
-            if(win.checkboxes.byName("Countdown for ").value()=='0'){
-                saveState_CountdownFor = true
-                //Enable to allow reading of countdown info
-                win.checkboxes.byName("Countdown for ").click()
+            prefs.general = {
+                ShowSFHelper:win.checkboxes["Show ScreenFlow options in menu bar"].value(),
+                CountdownEnabled:win.checkboxes["Countdown for "].value(),
+                CountdownTime:win.textFields[0].value(),
+                SFDiagnostics:win.checkboxes['Send diagnostic and usage information'].value(),
+                VideoScaling_LockAspectRatio: win.checkboxes['Lock Aspect Ratio when scaling with mouse'].value(),
+                Autoupdate: win.checkboxes['Check for ScreenFlow updates at launch'].value(),
+                RecordingHotkey:'@',
+                PauseHotkey:'@',
+                AddMarkerHotkey:'@'
             }
-            prefs.general = {}
+            var win = getTab(1)
+            prefs.timeline = {
+                SMPTE:              win.checkboxes["Use SMPTE timecode"].value(),
+                ActionMenuOverlays: win.checkboxes["Hide action menu overlay in clips"].value(),
+                StereoWaveforms:    win.checkboxes["Show stereo audio waveforms"].value(),
+                DefTransition:      win.popUpButtons[0].value(),
+                DefTrackHeight:     win.popUpButtons[1].value(),
+                DefActionCurve:     win.popUpButtons[2].value(),
+                DefDurations:       function(){
+                                        durations = {}
+
+                                        for(var i=0;i<win.scrollAreas[0].tables[0].rows().length;i++){
+                                            var row = win.scrollAreas[0].tables[0].rows()[i]
+                                            durations[row.textFields[0].value().replace(/ /g,"")] = row.textFields[1].value()
+                                        }
+                                        return durations
+                                    }
+            }
+            //Get advanced preferences
+            var win = getTab(2)
+            prefs.advanced = {
+                VideoMagnification: (win.radioGroups[0].radioButtons["Smooth"].value()==1) ? "Smooth" : "Sharp"
+                ScreenRecordingCompression:(win.radioGroups[1].radioButtons["Adaptive"].value()==1) ? "Adaptive" : "Lossless"
+            }
         }
 
-
-
-
-        }
+        return prefs
     },
     setPreferences: function(win,prefs){
 
@@ -126,6 +161,11 @@ Screenflow = {
         var system = Application('System Events')
         var SF = system.processes['ScreenFlow']
         SF.menuBars[0].menus['ScreenFlow'].menuItems["Quit and Keep Windows"].click()
+    },
+    ActiveProject = function(){
+        this.path = getPath()
+        this.screenDimensions = getScreenDimensions()
+        this.backgroundColor = getBackgroundColor()
     }
 }
 Project = function(){
@@ -161,11 +201,6 @@ Project = function(){
     }
     create = function(){
         //creates a screenflow project from a project object
-    }
-    getCurrentProject = function(){
-        this.path = getPath()
-        this.screenDimensions = getScreenDimensions()
-        this.backgroundColor = getBackgroundColor()
     }
 }
 
