@@ -35,6 +35,76 @@ function getScreenFlowTimeCode(filename){
     }
 }
 
+function getMarkersWindow(){
+	Application('ScreenFlow').activate()
+	var system = Application('System Events')
+	var SF = system.processes['ScreenFlow']
+	for(var i = 0;i<SF.windows.length;i++){
+		try {
+			if(SF.windows[i].attributes['accessibilityIdentifier'].value() == 'MarkersWindowIdentifier'){
+				return SF.windows[i]
+			}
+		} catch (e) {
+
+		}
+	}
+
+	//Otherwise open markers window.
+	SF.menuBars[0].menus['Window'].menuItems['Markers'].click()
+
+	//accessibilityTitle	Window //mnu bar item
+	//accessibilityTitle	Markers
+	return SF.windows[0]
+}
+
+function goToTime(frames){
+	//Get time in seconds
+	seconds = frames /30
+
+	//Get the markers window
+	Application('ScreenFlow').activate()
+	window = getMarkersWindow()
+
+	//find MyGoToMarker -- Not fully implemented yet!!
+	rows = window.scrollAreas[0].tables[0].rows()
+	for(var i =0;i<rows.length;i++){
+		if(rows[i].textFields[0].value()=="MyGoToMarker"){
+			var row = rows[i]
+			break
+		}
+	}
+
+	//Assumed marker found
+	row.textFields[1].focused = true
+	row.textFields[1].value = seconds.toString()
+
+	//GoTo time
+	row.buttons[0].focused = true
+	row.buttons[0].click()
+
+	//Close markers window:
+	window.buttons[2].click()
+}
+
+function sleep(ms) {
+    var start = Date.now(),
+        now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
+}
+
+
+
+
+
+/* //GET 1s Frame States
+//E.G.
+//00:00:00:01
+//00:00:00:02
+//00:00:00:03
+//etc
+
 var sf = Application('ScreenFlow')
 var system = Application('System Events')
 sf.activate()
@@ -43,3 +113,41 @@ for(var i = 0;i<10;i++){
     getScreenFlowTimeCode("TimeCodeFrame0" + i)
     system.keyCode(124)
 }
+//*/
+
+
+/* //GET 10s Frame States
+//E.G.
+//00:00:00:00
+//00:00:00:10
+//00:00:00:20
+//etc
+var sf = Application('ScreenFlow')
+var system = Application('System Events')
+sf.activate()
+sleep(300)
+system.keystroke("0", {using: 'command down'})
+for(var i = 0;i<3;i++){
+	goToTime(i*10)
+	getScreenFlowTimeCode("TimeCodeFrame" + i + "0")
+}
+//*/
+
+/*
+//GET 1s Second States
+//E.G.
+//00:00:00:00
+//00:00:01:00
+//00:00:02:00
+//etc
+var sf = Application('ScreenFlow')
+var system = Application('System Events')
+sf.activate()
+sleep(300)
+system.keystroke("0", {using: 'command down'})
+for(var i = 0;i<10;i++){
+	goToTime(i*30)
+	getScreenFlowTimeCode("TimeCodeFrame" + i + "00")
+	sleep(300) //for stability
+}
+//*/
