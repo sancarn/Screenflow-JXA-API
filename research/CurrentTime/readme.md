@@ -91,7 +91,7 @@ this will return all distinguishable pixels with their location and state identi
 
 A handy filter for Console.App is using "osascript":
 
-![ConsoleFilterExample](https://github.com/sancarn/Screenflow-JXA-API/raw/master/research/CurrentTime/Console%20Filter%20OSAScript.png)
+![ConsoleFilterExample](Console Filter OSAScript.png)
 
 # Distinguishable Pixels
 
