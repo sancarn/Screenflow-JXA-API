@@ -94,6 +94,17 @@ A handy filter for Console.App is using "osascript":
 
 ## 1s frame digit:
 
+I.E.
+
+```
+00:00:00:00
+00:00:00:01
+00:00:00:02
+00:00:00:03
+...
+```
+
+
 This has 10 states: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 
 16/45 pixels found to be unique over all states.
@@ -119,6 +130,15 @@ Distinguishable Pixel Success: [100,19] --> Values: [[90,169,204,1],[5,26,53,1],
 
 
 ## 10s frame digit: 
+
+I.E.
+
+```
+00:00:00:00
+00:00:00:10
+00:00:00:20
+...
+```
 
 This has 3 states: 0, 1, 2
 
@@ -160,6 +180,15 @@ Distinguishable Pixel Success: [94,19] --> Values: [[31,76,107,1],[5,26,53,1],[4
 ```
 
 ## 1/10s second/minute/hour states:
+
+I.E.
+
+```
+00:00:01:00
+00:00:02:00
+00:00:03:00
+...
+```
 
 Counterintuitively these have 20 states. This is because the seconds/minutes/hours becomes lighter/darker depending on whether there is content existent above the 1 second, 1 minute and 1 hour mark, respectively. Ultimately each number has 2 states - light states and dark states.
 
