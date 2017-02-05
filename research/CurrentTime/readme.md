@@ -1,4 +1,7 @@
-## Method:
+# Theory
+![Image](ScreenFlow Clock Schamtic.png)
+
+# Method:
 
 1. Get individual pictures specific to each TimeStamp state.
 2. Check all pixels of all images, and find unique pixel color values.
