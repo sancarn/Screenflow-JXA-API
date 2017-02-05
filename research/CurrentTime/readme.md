@@ -190,7 +190,7 @@ I.E.
 ...
 ```
 
-Counterintuitively these have 20 states. This is because the seconds/minutes/hours becomes lighter/darker depending on whether there is content existent above the 1 second, 1 minute and 1 hour mark, respectively. Ultimately each number has 2 states - light states and dark states.
+Counterintuitively these have 20 states. This is because the seconds/minutes/hours becomes lighter/darker depending on whether there is content existent above the 1 second, 1 minute and 1 hour mark, respectively. Ultimately each number has 2 states - light states and dark states. [Click here for a demonstration](https://www.youtube.com/watch?v=EwqpD4lFmfI).
 
 2/112 pixels found to be unique over all states.
 
