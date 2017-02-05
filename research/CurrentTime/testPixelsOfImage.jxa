@@ -6,6 +6,7 @@ $.NSLog("# START TEST #")
 $.NSLog("##############")
 
 //BoundingBox [x ,y ,w,h]
+///*
 var BoundingBox = {x:97,y:14,w:5,h:9}
 var imagePaths = [
     "/Users/Sancarn/Pictures/TimeCodeFrame00.png",
@@ -19,6 +20,33 @@ var imagePaths = [
     "/Users/Sancarn/Pictures/TimeCodeFrame08.png",
     "/Users/Sancarn/Pictures/TimeCodeFrame09.png"
 ]
+//*/
+
+/*
+var BoundingBox = {x:90,y:14,w:6,h:9}
+var imagePaths = [
+    "/Users/Sancarn/Pictures/TimeCodeFrame00.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame10.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame20.png"
+]
+//*/
+
+/*
+var BoundingBox = {x:78,y:12,w:9,h:14}
+var imagePaths = [
+    "/Users/Sancarn/Pictures/TimeCodeFrame000.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame100.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame200.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame300.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame400.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame500.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame600.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame700.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame800.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame900.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame_Dark0.png"
+]
+//*/
 
 //Get array of image objects
 var images = [];
@@ -46,7 +74,8 @@ for(var i=0;i<BoundingBox.w;i++){
                 }
             }
 
-            $.NSLog("Distinguishable Pixel Success: " + JSON.stringify([px,py])+"\n")
+            $.NSLog("Distinguishable Pixel Success: " + JSON.stringify([px,py]) + " --> Values: " + JSON.stringify(col) + "\n")
+
         }
     }
 }
