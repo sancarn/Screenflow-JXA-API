@@ -112,7 +112,7 @@ This has 10 states: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 
 16/45 pixels found to be unique over all states.
 
-relative to x:78,y:11
+BoundingBox = {x:97,y:14,w:5,h:9}
 
 ```
 Distinguishable Pixel Success: [97,14] --> Values: [[54,149,188,1],[0,0,0,1],[62,170,213,1],[42,120,151,1],[50,92,112,1],[41,120,152,1],[50,137,172,1],[66,189,238,1],[53,144,181,1],[17,51,64,1]]
@@ -148,6 +148,8 @@ I.E.
 This has 3 states: 0, 1, 2
 
 32/54 pixels found to be unique over all states.
+
+BoundingBox = {x:90,y:14,w:6,h:9}
 
 ```
 Distinguishable Pixel Success: [90,14] --> Values: [[67,190,239,1],[0,0,0,1],[67,193,243,1]]
@@ -200,6 +202,8 @@ Counterintuitively these have 20 states. This is because the seconds/minutes/hou
 2/112 pixels found to be unique over all states.
 
 You can tell these 20 states apart using either of these 2 distinguishable pixels:
+
+BoundingBox = {x:78,y:11,w:8,h:14}
 
 ```
 Distinguishable Pixel Success: [80,12] --> Values: [[58,180,228,1],[24,76,96,1],[54,164,209,1],[48,152,194,1],[20,20,22,1],[52,166,211,1],[53,168,214,1],[58,173,220,1],[57,179,227,1],[60,191,243,1],[21,60,76,1],[7,23,29,1],[22,57,70,1],[17,50,63,1],[5,6,6,1],[18,54,68,1],[18,55,68,1],[26,64,79,1],[19,59,75,1],[22,64,81,1]]
