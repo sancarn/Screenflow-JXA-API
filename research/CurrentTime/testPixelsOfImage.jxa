@@ -1,0 +1,100 @@
+ObjC.import('Foundation')
+ObjC.import('AppKit')
+
+$.NSLog("##############")
+$.NSLog("# START TEST #")
+$.NSLog("##############")
+
+//BoundingBox [x ,y ,w,h]
+var BoundingBox = {x:97,y:14,w:5,h:9}
+var imagePaths = [
+    "/Users/Sancarn/Pictures/TimeCodeFrame00.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame01.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame02.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame03.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame04.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame05.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame06.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame07.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame08.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame09.png"
+]
+
+//Get array of image objects
+var images = [];
+for(var i=0;i<imagePaths.length;i++){
+    images.push($.NSImage.alloc.initWithContentsOfFile($(imagePaths[i])))
+}
+
+//$.NSLog(JSON.stringify(images[1].size))
+
+//Loop through pixels of image objects
+for(var i=0;i<BoundingBox.w;i++){
+    for(var j=0;j<BoundingBox.h;j++){
+
+        TryPixel: {
+            //Try chosen pixel with all images.
+            var col = [];
+            for(var iImage=0; iImage<images.length; iImage++){
+                px = BoundingBox.x + i
+                py = BoundingBox.y + j
+                arr = getPixel(px,py,images[iImage])
+                col = arrayAdd(col,arr)
+                if(col==undefined){
+                    $.NSLog("Duplicate found at " + iImage + "\n")
+                    break TryPixel
+                }
+            }
+
+            $.NSLog("Distinguishable Pixel Success: " + JSON.stringify([px,py])+"\n")
+        }
+    }
+}
+
+$.NSLog("Test pixels has finished running"+"\n")
+
+$.NSLog("##############")
+$.NSLog("#  END TEST  #")
+$.NSLog("##############")
+
+//If array already exists in collection, return undefined, else push array to collection.
+function arrayAdd(col,arr){
+    $.NSLog("arr: " + JSON.stringify(arr)+"\n")
+    //$.NSLog("col: " + JSON.stringify(col)+"\n")
+    if(JSON.stringify(col).indexOf(JSON.stringify(arr))>-1){
+        $.NSLog("Match was found")
+        return undefined
+    } else {
+        $.NSLog("Match was not found")
+        col.push(arr)
+        return col
+    }
+}
+
+function getPixel(x,y,img){
+    ObjC.import('Foundation')
+    ObjC.import('AppKit')
+
+	//Get a point object
+	var pnt = $.NSMakePoint(x,y)
+
+	//Target the image
+	img.lockFocus
+
+	//Target read point from target
+	var clr = $.NSReadPixel(pnt)
+
+	//Untarget the image
+	img.unlockFocus
+
+	//Release img - saving memory
+	//img.release //DONT RELEASE THE MEMORY!!
+
+	//Return R,G,B and A
+	return [
+			parseInt(255*clr.redComponent),
+			parseInt(255*clr.greenComponent),
+			parseInt(255*clr.blueComponent),
+			clr.alphaComponent
+		   ];
+}
