@@ -35,7 +35,7 @@ var imagePaths = [
 
 After these 2 variables are set up, run the script.
 
-All information discovered will be found in the Console Window. E.G.
+All information discovered will be found in the [Console Application window](https://computers.tutsplus.com/tutorials/how-to-use-console-your-macs-diagnostic-diary--mac-45251). E.G.
 
 ```
 Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: ##############
