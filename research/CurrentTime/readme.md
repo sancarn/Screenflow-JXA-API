@@ -1,3 +1,91 @@
+## Method:
+
+1. Get individual pictures specific to each TimeStamp state.
+2. Check all pixels of all images, and find unique pixel color values.
+
+### Step 1
+
+To complete step 1 we use `grabSourcePictures.jxa`
+
+This script contains 3 sub-scripts (at the bottom).
+Each sub-script extracts a different image from ScreenFlow
+The scripts will dump the pictures to "/Users/Sancarn/Pictures/... ". Change this file path as needed.
+
+### Step 2
+
+To complete step 2 we use the `testPixelsOfImage.jxa` script.
+
+This script runs over a region specified by a variable named BoundingBox:
+
+```
+var BoundingBox = {x:97,y:14,w:5,h:9}
+```
+
+The properties x,y,w and h are calculated manually by zooming inot the picture with Preview.
+
+The images to check over is defined by the `imagePaths` array. This will be the path of all 'state changes' and will be an array of file paths. E.G.
+
+```
+var imagePaths = [
+    "/Users/Sancarn/Pictures/TimeCodeFrame00.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame10.png",
+    "/Users/Sancarn/Pictures/TimeCodeFrame20.png"
+]
+```
+
+After these 2 variables are set up, run the script.
+
+All information discovered will be found in the Console Window. E.G.
+
+```
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: ##############
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: # START TEST #
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: ##############
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: arr: [54,149,188,1]
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: arr: [0,0,0,1]
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: arr: [62,170,213,1]
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: arr: [42,120,151,1]
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: arr: [50,92,112,1]
+Feb  5 16:45:10 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [41,120,152,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [50,137,172,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [66,189,238,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [53,144,181,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [17,51,64,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Distinguishable Pixel Success: [97,14] --> Values: [[54,149,188,1],[0,0,0,1],[62,170,213,1],[42,120,151,1],[50,92,112,1],[41,120,152,1],[50,137,172,1],[66,189,238,1],[53,144,181,1],[17,51,64,1]]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [20,39,47,1]
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: Match was not found
+Feb  5 16:45:11 Sancarns-Pro.lan osascript[78790]: arr: [0,0,0,1]
+
+-EDIT: SNIP-
+
+Feb  5 16:45:33 Sancarns-Pro.lan osascript[78790]: Duplicate found at 1
+Feb  5 16:45:33 Sancarns-Pro.lan osascript[78790]: Test pixels has finished running
+Feb  5 16:45:33 Sancarns-Pro.lan osascript[78790]: ##############
+Feb  5 16:45:33 Sancarns-Pro.lan osascript[78790]: #  END TEST  #
+Feb  5 16:45:33 Sancarns-Pro.lan osascript[78790]: ##############
+```
+
+Here we can analyse what the code is doing. To find Distinguishable Pixels, i.e. pixels we can check to determine the number, take the log contents and use a tool like regexr.com to get a list of the matches:
+
+```
+RegEx: Distinguishable Pixel Success.*
+List: $&\n
+```
+
+this will return all distinguishable pixels with their location and state identities.
+
+# Distinguishable Pixels
+
 ## 1s frame digit:
 
 This has 10 states: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
