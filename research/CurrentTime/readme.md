@@ -158,3 +158,17 @@ Distinguishable Pixel Success: [94,17] --> Values: [[79,157,188,1],[0,0,0,1],[36
 Distinguishable Pixel Success: [94,18] --> Values: [[70,142,177,1],[4,24,50,1],[63,124,156,1]]
 Distinguishable Pixel Success: [94,19] --> Values: [[31,76,107,1],[5,26,53,1],[48,104,137,1]]
 ```
+
+## 1/10s second/minute/hour states:
+
+Counterintuitively these have 20 states. This is because the seconds/minutes/hours becomes lighter/darker depending on whether there is content existent above the 1 second, 1 minute and 1 hour mark, respectively. Ultimately each number has 2 states - light states and dark states.
+
+2/112 pixels found to be unique over all states.
+
+You can tell these 20 states apart using either of these 2 distinguishable pixels:
+
+```
+Distinguishable Pixel Success: [80,12] --> Values: [[58,180,228,1],[24,76,96,1],[54,164,209,1],[48,152,194,1],[20,20,22,1],[52,166,211,1],[53,168,214,1],[58,173,220,1],[57,179,227,1],[60,191,243,1],[21,60,76,1],[7,23,29,1],[22,57,70,1],[17,50,63,1],[5,6,6,1],[18,54,68,1],[18,55,68,1],[26,64,79,1],[19,59,75,1],[22,64,81,1]]
+Distinguishable Pixel Success: [80,21] --> Values: [[109,195,229,1],[114,202,236,1],[110,197,231,1],[98,180,214,1],[61,127,161,1],[101,184,217,1],[105,191,224,1],[109,195,230,1],[96,177,211,1],[102,186,220,1],[47,97,129,1],[49,101,133,1],[48,99,130,1],[41,88,121,1],[24,61,92,1],[43,91,122,1],[41,90,123,1],[47,96,130,1],[40,86,118,1],[44,92,125,1]]
+```
+
