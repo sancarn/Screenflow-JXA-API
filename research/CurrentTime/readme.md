@@ -1,5 +1,5 @@
 # Theory
-![Image](ScreenFlow Clock Schamtic.png)
+![Image](ScreenFlow Clock Schematic.png)
 
 # Method:
 
