@@ -131,7 +131,7 @@ Project
 |   ├── <Video 1>
 |   ├── <Video 2>
 │   └── [Array]
-└── SelectedClip
+└── selectedClip
 ```
 
 # Clip class
