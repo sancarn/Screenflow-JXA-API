@@ -8,6 +8,8 @@ The ScreenFlow Application object is the entry point for all applications which 
 
 ```
 Screenflow
+├── version
+├── versionNames
 ├── Preferences
 │   ├── General
 │   │   ├── Settings
