@@ -33,6 +33,7 @@ Screenflow
 |   ├── ActiveProject()
 |   └── [Array]
 ...
+```
 
 # Project class
 
