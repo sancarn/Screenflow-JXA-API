@@ -6,6 +6,7 @@ This is mainly a guidance document, and outlines the exposed API objects which *
 
 The ScreenFlow Application object is the entry point for all applications which use the ScreenFlow JXA API.
 
+```
 Screenflow
 ├── Preferences
 │   ├── General
