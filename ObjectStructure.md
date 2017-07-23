@@ -61,6 +61,7 @@ Sometimes it is desired, within a collection or array of a certain type of objec
 
 ```
 Windows
+├── <ClassName ID>
 ├── <Window 1>
 └── <Window 2>
 ```
