@@ -1,7 +1,12 @@
 # Screenflow-JXA-API
+
 The ScreenFlow-JXA-API is the replacement API for the ScreenFlow-AppleScript-API. This repository is much more up to date than the last and boasts significantly more functionality.
 
 Version: 0.0.1
+
+## Status: Abandoned
+
+This project was initially designed due to frustrations with editing complex videos in screenflow. Unfortunately this API never really saw any significant development and I no longer have the time (or patience with JXA) to maintain it. I.E. I have abandoned the project. Please feel free to fork it and expand it into your own screenflow API, as I will not be working on this for the forseeable future.
 
 ## Installation:
 
